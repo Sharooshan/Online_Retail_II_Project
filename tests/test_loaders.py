@@ -45,3 +45,30 @@ def test_missing_worksheet(tmp_path):
 
     with pytest.raises(RetailDataLoadError):
         loader.load_excel(("MissingSheet",))
+
+def test_successful_excel_loading(tmp_path):
+    """Verify that valid worksheets load and combine correctly."""
+    file_path = tmp_path / "retail_sample.xlsx"
+
+    first = pd.DataFrame({
+        "Invoice": ["10001"],
+        "Quantity": [2],
+        "Price": [5.0],
+    })
+
+    second = pd.DataFrame({
+        "Invoice": ["10002"],
+        "Quantity": [3],
+        "Price": [7.0],
+    })
+
+    with pd.ExcelWriter(file_path) as writer:
+        first.to_excel(writer, sheet_name="Year 2009-2010", index=False)
+        second.to_excel(writer, sheet_name="Year 2010-2011", index=False)
+
+    loader = RetailDataLoader(str(file_path))
+    result = loader.load()
+
+    assert len(result) == 2
+    assert result["Invoice"].tolist() == [10001, 10002]
+    assert result["Quantity"].tolist() == [2, 3]

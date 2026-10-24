@@ -1,10 +1,11 @@
 
 import pandas as pd
 
+from .base import RetailPipelineStage
+
 from .validation import RetailDataValidator, REQUIRED_COLUMNS
 
-
-class RetailDataPreprocessor:
+class RetailDataPreprocessor(RetailPipelineStage):
     """Prepare retail transactions for daily revenue analysis."""
 
     def __init__(self, remove_duplicates: bool = True):
@@ -98,3 +99,7 @@ class RetailDataPreprocessor:
         }
 
         return cleaned
+    
+    def process(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Process transactions using the cleaning pipeline."""
+        return self.clean(data)

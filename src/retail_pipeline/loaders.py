@@ -3,6 +3,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from .exceptions import RetailDataLoadError
+
 
 class RetailDataLoader:
     """Load retail transaction data from supported files."""
@@ -26,10 +28,20 @@ class RetailDataLoader:
         frames = []
 
         for sheet_name in sheet_names:
-            frame = pd.read_excel(
-                self._file_path,
-                sheet_name=sheet_name
-            )
-            frames.append(frame)
+            try:
+                frame = pd.read_excel(
+                    self._file_path,
+                    sheet_name=sheet_name
+                )
+
+            except (FileNotFoundError, ValueError, OSError) as exc:
+                raise RetailDataLoadError(
+                    f"Unable to load worksheet '{sheet_name}' "
+                    f"from '{self._file_path}'"
+                ) from exc
+
+            else:
+                frames.append(frame)
 
         return pd.concat(frames, ignore_index=True)
+

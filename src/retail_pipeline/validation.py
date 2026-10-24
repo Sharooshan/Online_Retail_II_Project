@@ -1,5 +1,6 @@
 
 import pandas as pd
+from .base import RetailPipelineStage
 
 
 REQUIRED_COLUMNS = {
@@ -14,7 +15,7 @@ REQUIRED_COLUMNS = {
 }
 
 
-class RetailDataValidator:
+class RetailDataValidator(RetailPipelineStage):
     """Validate the structure and quality of retail data."""
 
     def __init__(self, required_columns: set[str]):
@@ -84,3 +85,9 @@ class RetailDataValidator:
             "negative_quantities": negative_quantities,
             "zero_prices": zero_prices,
         }
+
+    def process(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Validate the schema and return the original DataFrame."""
+        self.validate_schema(data)
+        return data
+    

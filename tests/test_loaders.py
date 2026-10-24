@@ -1,4 +1,5 @@
 
+import pandas as pd
 import pytest
 
 from src.retail_pipeline.loaders import RetailDataLoader
@@ -13,8 +14,10 @@ def test_missing_excel_file():
     with pytest.raises(RetailDataLoadError):
         loader.load_excel(("Year 2009-2010",))
 
+
 def test_empty_sheet_names():
     """Reject an empty worksheet selection."""
+
     loader = RetailDataLoader("data/example.xlsx")
 
     with pytest.raises(ValueError):
@@ -23,6 +26,7 @@ def test_empty_sheet_names():
 
 def test_missing_worksheet(tmp_path):
     """Raise a custom exception for a missing worksheet."""
+
     file_path = tmp_path / "sample.xlsx"
 
     sample = pd.DataFrame({

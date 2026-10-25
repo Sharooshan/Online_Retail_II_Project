@@ -1,0 +1,43 @@
+
+TASK 2 - STORAGE FORMAT INVESTIGATION
+EXPERIMENTAL ENVIRONMENT
+
+Dataset: UCI Online Retail II
+Cleaned dataset: 1,007,913 rows, 9 columns
+
+Operating system: Windows 10
+Processor: Intel Core i5-12500H (12th Gen)
+Physical CPU cores: 12
+Logical processors: 16
+Installed RAM: 7.67 GB
+
+Python: 3.12.10
+pandas: 3.1.0
+NumPy: 2.5.4
+PyArrow: 26.0.0
+Matplotlib: 3.11.2
+
+STORAGE CONFIGURATIONS
+1. CSV - Plain
+2. CSV - GZIP
+3. Pickle - Plain
+4. Pickle - GZIP
+5. Parquet - Plain
+6. Parquet - Snappy
+
+MEASURED OPERATIONS
+1. Dataset writing
+2. Full dataset reading
+3. Revenue column reading
+
+TIMING METHODOLOGY
+One warm-up run excluded per operation.
+Five measured repetitions per operation.
+Statistics: median, minimum, maximum and range.
+
+DATA VALIDATION
+All six stored configurations passed the
+data-integrity verification checks.
+
+EXPERIMENT DATE
+[Enter the actual benchmark execution date]

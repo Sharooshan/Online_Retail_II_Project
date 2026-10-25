@@ -12,14 +12,32 @@ __pycache__/
 .vscode/
 .idea/
 
-# Raw dataset
-data/*.xlsx
-data/*.xls
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Raw and processed datasets
+data/
+*.xlsx
+*.xls
+*.parquet
+*.pkl
+*.pickle
+*.joblib
+*.gz
 
 # Generated outputs
 outputs/
-*.pkl
-*.joblib
+
+# Benchmark CSV results (keep locally)
+results/storage/*.csv
+
+# Temporary files
+*.log
+*.tmp
 
 # Operating system
 .DS_Store

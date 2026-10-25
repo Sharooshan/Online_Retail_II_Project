@@ -42,3 +42,4 @@ results/storage/*.csv
 # Operating system
 .DS_Store
 Thumbs.db
+*.docx

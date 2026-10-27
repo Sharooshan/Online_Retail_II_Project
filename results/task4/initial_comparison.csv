@@ -1,0 +1,3 @@
+Framework,InputRows,DailyRecords,ExecutionSeconds
+pandas,1007913,604,0.18628820031881332
+PySpark,1007913,604,1.7802908001467586

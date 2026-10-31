@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import json
+import joblib 
 
 import numpy as np
 import pandas as pd
@@ -595,6 +596,28 @@ def main():
         best_name,
         trained_models
     )
+    # ============================================================
+    # SAVE SELECTED MODEL FOR NEXT-DAY FORECASTING
+    # ============================================================
+
+    if best_name not in trained_models:
+        raise ValueError(
+            f"Selected model cannot be saved: {best_name}"
+        )
+
+    model_path = OUTPUT_DIR / "selected_model.joblib"
+
+    joblib.dump(
+        {
+            "model": trained_models[best_name],
+            "model_name": best_name,
+            "features": FEATURES,
+            "training_scope": "Training and validation periods",
+        },
+        model_path
+    )
+
+    print(f"Selected model saved: {model_path}")
 
     experiment_summary = {
         "total_observations": len(df),

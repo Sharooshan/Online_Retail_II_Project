@@ -1,0 +1,11 @@
+{
+    "total_observations": 709,
+    "feature_count": 12,
+    "training_observations": 496,
+    "validation_observations": 106,
+    "test_observations": 107,
+    "selection_metric": "Validation MAE",
+    "selected_model": "Random Forest",
+    "test_start": "2011-08-25",
+    "test_end": "2011-12-09"
+}
